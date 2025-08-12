@@ -1,0 +1,41 @@
+services:
+  db:
+    image: mariadb:11.3
+    restart: unless-stopped
+    environment:
+      MARIADB_DATABASE: licensehub
+      MARIADB_USER: licensehub
+      MARIADB_PASSWORD: licensehub
+      MARIADB_ROOT_PASSWORD: rootpassword
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+  app:
+    build: .
+    depends_on:
+      - db
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+      - JWT_SECRET=${JWT_SECRET}
+      - JWT_ALGORITHM=${JWT_ALGORITHM}
+      - JWT_EXPIRE_MINUTES=${JWT_EXPIRE_MINUTES}
+      - AD_SERVER_URI=${AD_SERVER_URI}
+      - AD_BASE_DN=${AD_BASE_DN}
+      - AD_USER_DN_FORMAT=${AD_USER_DN_FORMAT}
+      - AD_USE_SSL=${AD_USE_SSL}
+      - AD_SERVICE_ACCOUNT_DN=${AD_SERVICE_ACCOUNT_DN}
+      - AD_SERVICE_ACCOUNT_PASSWORD=${AD_SERVICE_ACCOUNT_PASSWORD}
+      - APP_HOST=${APP_HOST}
+      - APP_PORT=${APP_PORT}
+      - APP_ENV=${APP_ENV}
+      - SITE_NAME=${SITE_NAME}
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./app:/app/app
+      - ./.env:/app/.env:ro
+
+volumes:
+  db_data:

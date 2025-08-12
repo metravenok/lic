@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ site_name }}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" />
+    <style>
+      body { padding: 1rem; }
+      .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; }
+    </style>
+  </head>
+  <body>
+    <main class="container">
+      <h1>{{ site_name }}</h1>
+      <p>Software license management for Autodesk, nanoCAD, Enscape, Rhino 3D, and more.</p>
+
+      <div class="grid">
+        <article>
+          <h3>API Docs</h3>
+          <p>Explore REST endpoints.</p>
+          <a href="/docs">Open Swagger UI</a>
+        </article>
+        <article>
+          <h3>Catalog</h3>
+          <ul>
+            <li><a href="/products">GET /products</a></li>
+            <li><a href="/vendors">GET /vendors</a></li>
+          </ul>
+        </article>
+        <article>
+          <h3>Licenses</h3>
+          <ul>
+            <li><a href="/licenses">GET /licenses</a></li>
+            <li><a href="/jobs/check-expirations">Check expirations</a></li>
+          </ul>
+        </article>
+        <article>
+          <h3>Assignments</h3>
+          <ul>
+            <li><a href="/assignments">GET /assignments</a></li>
+          </ul>
+        </article>
+        <article>
+          <h3>Purchasing</h3>
+          <ul>
+            <li><a href="/purchase-orders">GET /purchase-orders</a></li>
+            <li><a href="/memos">GET /memos</a></li>
+          </ul>
+        </article>
+      </div>
+
+      <footer>
+        <small>© {{ site_name }} | Health: <a href="/healthz">/healthz</a></small>
+      </footer>
+    </main>
+  </body>
+</html>
